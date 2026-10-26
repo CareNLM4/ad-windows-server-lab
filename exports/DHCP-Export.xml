@@ -1,0 +1,875 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DHCPServer xmlns="http://schemas.microsoft.com/windows/DHCPServer">
+  <MajorVersion xmlns="">10</MajorVersion>
+  <MinorVersion xmlns="">0</MinorVersion>
+  <IPv4 xmlns="">
+    <ConflictDetectionAttempts>0</ConflictDetectionAttempts>
+    <NapEnabled>false</NapEnabled>
+    <NpsUnreachableAction>Full</NpsUnreachableAction>
+    <ActivatePolicies>true</ActivatePolicies>
+    <Classes>
+      <Class>
+        <Name>Classe de routage et d’accès distant par défaut</Name>
+        <Type>User</Type>
+        <Data>0x525241532e4d6963726f736f6674</Data>
+        <Description>Classe utilisateur pour les clients d’accès à distance</Description>
+      </Class>
+      <Class>
+        <Name>Classe BOOTP par défaut</Name>
+        <Type>User</Type>
+        <Data>0x424f4f54502e4d6963726f736f6674</Data>
+        <Description>Classe utilisateur pour les clients BOOTP</Description>
+      </Class>
+      <Class>
+        <Name>Options Microsoft Windows 2000</Name>
+        <Type>Vendor</Type>
+        <Data>0x4d53465420352e30</Data>
+        <Description>Options spécifiques aux fournisseurs Microsoft pour les clients Windows 2000 et versions ultérieures</Description>
+      </Class>
+      <Class>
+        <Name>Options Microsoft Windows 98</Name>
+        <Type>Vendor</Type>
+        <Data>0x4d534654203938</Data>
+        <Description>Options spécifiques aux fournisseurs Microsoft pour les clients Windows 98</Description>
+      </Class>
+      <Class>
+        <Name>Options Microsoft</Name>
+        <Type>Vendor</Type>
+        <Data>0x4d534654</Data>
+        <Description>Options spécifiques aux fournisseurs Microsoft applicables à tous les clients Windows</Description>
+      </Class>
+    </Classes>
+    <OptionDefinitions>
+      <OptionDefinition>
+        <Name>Itinéraires statiques sans classe</Name>
+        <OptionId>121</OptionId>
+        <Type>BinaryData</Type>
+        <MultiValued>false</MultiValued>
+        <Description>Adresses IP du routeur, du masque et de destination par ordre de priorité</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Masque de sous-réseau</Name>
+        <OptionId>1</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Masque de sous-réseau, octets dans l’ordre du réseau</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Décalage de temps</Name>
+        <OptionId>2</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Décalage UTC en secondes</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Routeur</Name>
+        <OptionId>3</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des adresses de routeurs par ordre de préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveur de temps</Name>
+        <OptionId>4</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des adresses des serveurs de temps, par préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs de noms</Name>
+        <OptionId>5</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de noms [IEN 116], par préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs DNS</Name>
+        <OptionId>6</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs DNS, par ordre de préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs de connexion</Name>
+        <OptionId>7</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de connexion MIT_LCS UDP dans le sous-réseau</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs de cookies</Name>
+        <OptionId>8</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de cookies, RFC 865</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs LPR</Name>
+        <OptionId>9</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de type RFC 1179, par préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs Impress</Name>
+        <OptionId>10</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs Imagen Impress</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs de recherche des ressources</Name>
+        <OptionId>11</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs ResLoc RFC 887 dans le sous-réseau, par préférence</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom d’hôte</Name>
+        <OptionId>12</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom d’hôte pour client, jeu de caractères RFC 1035</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Taille du fichier de démarrage</Name>
+        <OptionId>13</OptionId>
+        <Type>Word</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Taille du fichier image de démarrage par blocs de 512 octets</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Fichier de vidage Merit</Name>
+        <OptionId>14</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Chemin du fichier image mémoire après incident</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom de domaine DNS</Name>
+        <OptionId>15</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom de domaine DNS pour la résolution des clients</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveur d’échange</Name>
+        <OptionId>16</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresse du serveur d’échange du client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Chemin d’accès de la racine</Name>
+        <OptionId>17</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Chemin du disque racine du client, jeu de caractères NVT ASCII</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Chemin d’accès des extensions</Name>
+        <OptionId>18</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Fichier TFTP des extensions d’options</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Transfert sur la couche IP</Name>
+        <OptionId>19</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Désactive/active le transfert des paquets IP sur ce client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Routage de source non locale</Name>
+        <OptionId>20</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Désactive/active les datagrammes non locaux</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Masques de filtre de stratégie</Name>
+        <OptionId>21</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Paires d’adresses IP de destination/masque pour filtrer les itinéraires sources</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Taille maximale du datagramme de réassemblage</Name>
+        <OptionId>22</OptionId>
+        <Type>Word</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Taille du datagramme de réassemblage par client ; au maximum 576</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Durée de vie IP par défaut</Name>
+        <OptionId>23</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Durée de vie par défaut - datagrammes sortants clients</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Délai d’antériorité MTU de chemin dépassé</Name>
+        <OptionId>24</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Délai d’antériorité en secondes des valeurs MTU de chemin ; RFC 1191</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Table plateau MTU de chemin</Name>
+        <OptionId>25</OptionId>
+        <Type>Word</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Tailles découverte MTU, trié/taille, tout&gt;=68</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option MTU</Name>
+        <OptionId>26</OptionId>
+        <Type>Word</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Taille de découverte MTU, &gt;= 68</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Tous les sous-réseaux sont locaux</Name>
+        <OptionId>27</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Le client suppose que tous les sous-réseaux sont locaux</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Adresse de diffusion</Name>
+        <OptionId>28</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresse de diffusion</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Découvrir le masque</Name>
+        <OptionId>29</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Le client doit utiliser ICMP pour découvrir le masque de sous-réseau.</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option de fourniture de masque</Name>
+        <OptionId>30</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Le client doit répondre aux demandes du masque de sous-réseau via ICMP.</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Découvrir les routeurs</Name>
+        <OptionId>31</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Le client doit solliciter les routeurs en utilisant le document RFC 1256</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Adresse de sollicitations de routeur</Name>
+        <OptionId>32</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresse à utiliser pour les sollicitations du routeur</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option d’itinéraire statique</Name>
+        <OptionId>33</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Paires d’adresses IP de destination/routeur, par ordre de priorité</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Encapsulation des codes de fin</Name>
+        <OptionId>34</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Le client doit négocier l’utilisation des codes de fin (RFC 983).</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Dépassement de délai de cache ARP</Name>
+        <OptionId>35</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Délai en secondes pour les entrées de cache ARP</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Encapsulation Ethernet</Name>
+        <OptionId>36</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>0=&gt; le client doit utiliser ENet V2; 1=&gt; IEEE 802.3</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Durée de vie TCP par défaut</Name>
+        <OptionId>37</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Durée de vie que le client utilise lors de l’envoi de segments TCP</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Intervalle de conservation de connexion active</Name>
+        <OptionId>38</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Délai de conservation de connexion active en secondes</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Octet de conservation de connexion active</Name>
+        <OptionId>39</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>Envoie un octet parasite</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom de domaine NIS</Name>
+        <OptionId>40</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom de domaine du service NIS (Network Information Service)</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs NIS</Name>
+        <OptionId>41</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresses des serveurs NIS dans le sous-réseau du client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs NTP</Name>
+        <OptionId>42</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresses des serveurs NTP (Network Time Protocol)</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Informations spécifiques au fournisseur</Name>
+        <OptionId>43</OptionId>
+        <Type>BinaryData</Type>
+        <MultiValued>false</MultiValued>
+        <Description>Options intégrées spécifiques au fournisseur</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs WINS/NBNS</Name>
+        <OptionId>44</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresses NBNS par ordre de priorité</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>NBDD NetBIOS sur TCP/IP</Name>
+        <OptionId>45</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Adresses NBDD NetBIOS sur TCP/IP par ordre de priorité</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Type de nœud WINS/NBT</Name>
+        <OptionId>46</OptionId>
+        <Type>Byte</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0x00</DefaultValue>
+        <Description>0x1 = nœud-B, 0x2 = nœud-P, 0x4 = nœud-M, 0x8 = nœud-H</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Identificateur d’étendue NetBIOS</Name>
+        <OptionId>47</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Identificateur d’étendue NetBIOS sur TCP/IP</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Police système X Windows</Name>
+        <OptionId>48</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de police X Windows</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Affichage sur système X Windows</Name>
+        <OptionId>49</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Tableau des serveurs de gestionnaires d’affichage X Windows</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Bail</Name>
+        <OptionId>51</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Durée du bail de l’adresse IP du client en secondes</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Durée de renouvellement (T1)</Name>
+        <OptionId>58</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Intervalle entre l’attribution de l’adresse et l’état de RENOUVELLEMENT</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Durée de reliaison (T2)</Name>
+        <OptionId>59</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Intervalle entre l’attribution de l’adresse et l’état de RELIAISON</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom de domaine NIS+</Name>
+        <OptionId>64</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom du domaine NIS+ du client.</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs NIS+</Name>
+        <OptionId>65</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des adresses IP indiquant les serveurs NIS+</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom d’hôte du serveur de démarrage</Name>
+        <OptionId>66</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom d’hôte du serveur de démarrage TFTP</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Nom du fichier de démarrage</Name>
+        <OptionId>67</OptionId>
+        <Type>String</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue />
+        <Description>Nom du fichier de démarrage</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Agents locaux IP mobiles</Name>
+        <OptionId>68</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Agents locaux IP mobiles par ordre de priorité</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs SMTP (Simple Mail Transport Protocol)</Name>
+        <OptionId>69</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs SMTP accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs POP3 (Post Office Protocol)</Name>
+        <OptionId>70</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs POP3 accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs NNTP (Network News Transport Protocol)</Name>
+        <OptionId>71</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs NNTP accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs WWW (World Wide Web)</Name>
+        <OptionId>72</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs WWW accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs Finger</Name>
+        <OptionId>73</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs Finger accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs IRC (Internet Relay Chat)</Name>
+        <OptionId>74</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs IRC accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs StreetTalk</Name>
+        <OptionId>75</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs StreetTalk accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Serveurs STDA (StreetTalk Directory Assistance)</Name>
+        <OptionId>76</OptionId>
+        <Type>IPv4Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue>0.0.0.0</DefaultValue>
+        <Description>Liste des serveurs STDA accessibles au client</Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option Microsoft de désactivation du NetBIOS </Name>
+        <OptionId>1</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>1</DefaultValue>
+        <Description>Option d’activation ou de désactivation du NetBIOS pour les clients Microsoft Windows 2000</Description>
+        <VendorClass>Options Microsoft</VendorClass>
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option Microsoft de résiliation du bail DHCP lors de l’extinction</Name>
+        <OptionId>2</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>1</DefaultValue>
+        <Description>Option d’activation ou de désactivation de la résiliation des baux DHCP lors de l’extinction pour les clients Windows 2000</Description>
+        <VendorClass>Options Microsoft</VendorClass>
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Base métrique du routeur par défaut Microsoft</Name>
+        <OptionId>3</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>1</DefaultValue>
+        <Description>Métrique de base du routeur par défaut pour les clients Microsoft Windows 2000</Description>
+        <VendorClass>Options Microsoft</VendorClass>
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option Microsoft de désactivation du NetBIOS </Name>
+        <OptionId>1</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>1</DefaultValue>
+        <Description>Option d’activation ou de désactivation du NetBIOS pour les clients Microsoft Windows 2000</Description>
+        <VendorClass>Options Microsoft Windows 2000</VendorClass>
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Option Microsoft de résiliation du bail DHCP lors de l’extinction</Name>
+        <OptionId>2</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>1</DefaultValue>
+        <Description>Option d’activation ou de désactivation de la résiliation des baux DHCP lors de l’extinction pour les clients Windows 2000</Description>
+        <VendorClass>Options Microsoft Windows 2000</VendorClass>
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Base métrique du routeur par défaut Microsoft</Name>
+        <OptionId>3</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>0</DefaultValue>
+        <Description>Métrique de base du routeur par défaut pour les clients Microsoft Windows 2000</Description>
+        <VendorClass>Options Microsoft Windows 2000</VendorClass>
+      </OptionDefinition>
+    </OptionDefinitions>
+    <Filters>
+      <Allow>false</Allow>
+      <Deny>false</Deny>
+    </Filters>
+    <Scopes>
+      <Scope>
+        <ScopeId>192.168.126.0</ScopeId>
+        <Name>DC02-AD-Lab</Name>
+        <SubnetMask>255.255.255.0</SubnetMask>
+        <StartRange>192.168.126.100</StartRange>
+        <EndRange>192.168.126.200</EndRange>
+        <LeaseDuration>8.00:00:00</LeaseDuration>
+        <State>Active</State>
+        <Type>Dhcp</Type>
+        <MaxBootpClients>4294967295</MaxBootpClients>
+        <NapEnable>false</NapEnable>
+        <Delay>0</Delay>
+        <NapProfile />
+        <Description />
+        <ActivatePolicies>true</ActivatePolicies>
+        <SuperScopeName />
+        <OptionValues>
+          <OptionValue>
+            <OptionId>3</OptionId>
+            <Value>192.168.126.254</Value>
+            <VendorClass />
+            <UserClass />
+          </OptionValue>
+          <OptionValue>
+            <OptionId>6</OptionId>
+            <Value>192.168.126.10</Value>
+            <VendorClass />
+            <UserClass />
+          </OptionValue>
+          <OptionValue>
+            <OptionId>15</OptionId>
+            <Value>lab.local2</Value>
+            <VendorClass />
+            <UserClass />
+          </OptionValue>
+          <OptionValue>
+            <OptionId>51</OptionId>
+            <Value>691200</Value>
+            <VendorClass />
+            <UserClass />
+          </OptionValue>
+        </OptionValues>
+        <Leases>
+          <Lease>
+            <IPAddress>192.168.126.100</IPAddress>
+            <ScopeId>192.168.126.0</ScopeId>
+            <ClientId>00-0c-29-60-9f-a9</ClientId>
+            <AddressState>Active</AddressState>
+            <ClientType>Dhcp</ClientType>
+            <NapCapable>false</NapCapable>
+            <DnsRR>PTR</DnsRR>
+            <DnsRegistration>Complete</DnsRegistration>
+            <LeaseExpiryTime>2026-11-03 19:52:55Z</LeaseExpiryTime>
+            <NapStatus>FullAccess</NapStatus>
+            <HostName>DESKTOP-AJB69CP.lab.local2</HostName>
+          </Lease>
+          <Lease>
+            <IPAddress>192.168.126.130</IPAddress>
+            <ScopeId>192.168.126.0</ScopeId>
+            <ClientId>00-0c-29-1d-54-2e</ClientId>
+            <AddressState>Active</AddressState>
+            <ClientType>Dhcp</ClientType>
+            <NapCapable>false</NapCapable>
+            <DnsRR>PTR</DnsRR>
+            <DnsRegistration>Complete</DnsRegistration>
+            <LeaseExpiryTime>2026-10-31 14:48:05Z</LeaseExpiryTime>
+            <NapStatus>FullAccess</NapStatus>
+            <HostName>kali.lab.local2</HostName>
+          </Lease>
+        </Leases>
+      </Scope>
+    </Scopes>
+  </IPv4>
+  <IPv6 xmlns="">
+    <Classes>
+      <Class>
+        <Name>Options Microsoft Windows</Name>
+        <Type>Vendor</Type>
+        <Data>0x4d53465420352e30</Data>
+        <Description>Options spécifiques aux fournisseurs Microsoft pour les clients Windows</Description>
+        <VendorId>311</VendorId>
+      </Class>
+    </Classes>
+    <OptionDefinitions>
+      <OptionDefinition>
+        <Name>Liste des noms de domaine de serveurs SIP </Name>
+        <OptionId>21</OptionId>
+        <Type>String</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Nom de domaine des serveurs SIP accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste de recherche du domaine </Name>
+        <OptionId>24</OptionId>
+        <Type>String</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Liste de recherche du domaine utilisée par les clients pour résoudre les noms d’hôtes avec DNS, par préférence </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste de domaines NIS </Name>
+        <OptionId>29</OptionId>
+        <Type>String</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Noms de domaine de serveurs NIS accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste de noms de domaine NIS+ </Name>
+        <OptionId>30</OptionId>
+        <Type>String</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Noms de domaine de serveurs NIS+ accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste d’adresses IPv6 de serveurs SIP </Name>
+        <OptionId>22</OptionId>
+        <Type>IPv6Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Adresses IPv6 de serveurs SIP accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste d’adresses IPv6 de serveurs DNS de résolution de nom récursive </Name>
+        <OptionId>23</OptionId>
+        <Type>IPv6Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Adresses IPv6 de serveurs de noms récursifs DNS accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste d’adresses IPv6 NIS </Name>
+        <OptionId>27</OptionId>
+        <Type>IPv6Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Adresses IPv6 de serveurs NIS accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste d’adresses IPv6 NIS+ </Name>
+        <OptionId>28</OptionId>
+        <Type>IPv6Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Adresses IPv6 de serveurs NIS+ accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Liste d’adresses IPv6 de serveurs SNTP </Name>
+        <OptionId>31</OptionId>
+        <Type>IPv6Address</Type>
+        <MultiValued>true</MultiValued>
+        <DefaultValue />
+        <Description>Adresses IPv6 de serveurs SNTP accessibles au client </Description>
+        <VendorClass />
+      </OptionDefinition>
+      <OptionDefinition>
+        <Name>Temps d’actualisation des informations </Name>
+        <OptionId>32</OptionId>
+        <Type>DWord</Type>
+        <MultiValued>false</MultiValued>
+        <DefaultValue>86400</DefaultValue>
+        <Description>Cette option spécifie une limite supérieure de la durée pendant laquelle un client doit attendre avant d’actualiser les informations récupérées à partir du serveur DHCPv6 </Description>
+        <VendorClass />
+      </OptionDefinition>
+    </OptionDefinitions>
+    <StatelessStore>
+      <Enabled>false</Enabled>
+      <PurgeInterval>2.00:00:00</PurgeInterval>
+    </StatelessStore>
+  </IPv6>
+</DHCPServer>

@@ -1,0 +1,48 @@
+;
+;  Database file (null) for Default zone scope in zone lab.local2.
+;      Zone version:  53
+;
+
+@                       IN  SOA dc02-ad-lab.lab.local2. hostmaster.lab.local2. (
+                        		53           ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		3600       ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	dc02-ad-lab.lab.local2.
+
+;
+;  Zone records
+;
+
+@                       600	A	192.168.126.10
+
+;
+;  Delegated sub-zone:  _msdcs.lab.local2.
+;
+_msdcs                  NS	lab-test-chari.lab.local2.
+;  End delegation
+
+_gc._tcp.Default-First-Site-Name._sites 600	SRV	0 100 3268	dc02-ad-lab.lab.local2.
+_kerberos._tcp.Default-First-Site-Name._sites 600	SRV	0 100 88	dc02-ad-lab.lab.local2.
+_ldap._tcp.Default-First-Site-Name._sites 600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+_gc._tcp                600	SRV	0 100 3268	dc02-ad-lab.lab.local2.
+_kerberos._tcp          600	SRV	0 100 88	dc02-ad-lab.lab.local2.
+_kpasswd._tcp           600	SRV	0 100 464	dc02-ad-lab.lab.local2.
+_ldap._tcp              600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+_kerberos._udp          600	SRV	0 100 88	dc02-ad-lab.lab.local2.
+_kpasswd._udp           600	SRV	0 100 464	dc02-ad-lab.lab.local2.
+dc02-ad-lab             A	192.168.126.10
+DESKTOP-AJB69CP         1200	A	192.168.126.100
+DomainDnsZones          600	A	192.168.126.10
+_ldap._tcp.Default-First-Site-Name._sites.DomainDnsZones 600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+_ldap._tcp.DomainDnsZones 600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+ForestDnsZones          600	A	192.168.126.10
+_ldap._tcp.Default-First-Site-Name._sites.ForestDnsZones 600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+_ldap._tcp.ForestDnsZones 600	SRV	0 100 389	dc02-ad-lab.lab.local2.
+lab-test-chari          1200	A	192.168.126.10
