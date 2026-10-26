@@ -34,7 +34,6 @@ Mettre en place, configurer et documenter un petit réseau d'entreprise réalist
                     └─────────────────────────────────┘
 ```
 
-
 ## Outils utilisés
 
 - **VMware Workstation/Player** — virtualisation
@@ -77,19 +76,25 @@ Mettre en place, configurer et documenter un petit réseau d'entreprise réalist
 
 ![GPO du lecteur réseau mappé - liaison, propriétés et résultat côté client](screenshots/gpo_dossier_partage.png)
 
+### 6. Organisation de l'annuaire (OU) et restrictions
+- Création de trois unités d'organisation (OU) : `Accounts`, `WorkStations` et `Groups`, et déplacement des comptes, du groupe `Responsable` et du poste client depuis les conteneurs par défaut vers ces OU. Les conteneurs `Users`/`Computers` par défaut ne sont pas de vraies OU et ne permettent pas de lier une GPO dessus, d'où ce rangement.
+- Deux GPO de restriction ajoutées, liées à tout le domaine : blocage du Panneau de configuration/Paramètres, et blocage de l'invite de commandes (`cmd.exe`).
+
+### 7. Exports de configuration
+- Rapport complet de toutes les GPO (réglages, liaisons, ciblage) exporté avec `Get-GPOReport -All -ReportType Html` → [`exports/GPO-Report.html`](exports/GPO-Report.html)
+- Zone DNS exportée avec `Export-DnsServerZone` → [`exports/lab.local2-export.dns`](exports/lab.local2-export.dns)
+- Configuration DHCP (étendue, options, baux) exportée avec `Export-DhcpServer` → [`exports/DHCP-Export.xml`](exports/DHCP-Export.xml)
+
 ## Problèmes rencontrés et comment ils ont été résolus
 
 **Autorisation du serveur DHCP en échec (erreur 20070)**
 Sur une itération précédente de ce lab, l'autorisation du serveur DHCP dans Active Directory échouait systématiquement après l'installation du rôle, avec un message d'erreur générique. Diagnostic mené avec `dcdiag` (contrôleur de domaine en bonne santé) puis avec l'équivalent PowerShell de l'action (`Add-DhcpServerInDC`), qui a renvoyé une erreur précise : **Access Denied**. La cause réelle : le compte utilisé pour administrer le serveur n'était pas le vrai compte intégré *Administrateur*, mais un compte local secondaire créé automatiquement par l'hyperviseur — qui n'hérite pas des droits les plus élevés (*Enterprise Admins*) accordés uniquement au vrai compte Administrateur lors de la création de la première forêt. Reconnexion avec le bon compte → problème résolu.
 
-
 **Fond d'écran GPO qui ne s'affichait pas (fond noir)**
 La GPO de fond d'écran s'appliquait bien (confirmé avec `gpresult /r`) et le fichier était accessible manuellement, mais l'écran restait noir. En comparant le début et la fin du champ "Nom du papier peint" dans l'éditeur de GPO (le champ, trop étroit, n'affichait que la fin du texte), le chemin contenait en fait **le nom du dossier partagé en double** (`...interne\Dossier_Partage_interne\...`), pointant vers un dossier inexistant. Correction du chemin → problème résolu.
 
-
 **Lecteur réseau "orphelin" après modification d'une GPO**
 En réorganisant les GPO (séparation du fond d'écran et du mappage de lecteur en deux objets distincts), le lecteur réseau restait mappé sur le client avec l'ancien chemin, même après suppression du réglage dans la GPO d'origine (confirmé avec `net use`). Cause : une Préférence de stratégie de groupe supprimée ne retire pas automatiquement ce qu'elle avait déjà appliqué sur le client, sauf si l'option **"Supprimer cet élément lorsqu'il n'est plus appliqué"** avait été cochée dès sa création. Correction ponctuelle avec `net use X: /delete` puis `gpupdate /force`.
-
 
 ## Compétences démontrées
 
@@ -97,16 +102,18 @@ En réorganisant les GPO (séparation du fond d'écran et du mappage de lecteur 
 - Création et gestion d'un domaine Active Directory (utilisateurs, groupes de sécurité)
 - Gestion d'adressage IP (statique, DHCP, résolution de conflits réseau)
 - Création et ciblage de stratégies de groupe (GPO), y compris le ciblage au niveau de l'élément
+- Structuration de l'annuaire avec des unités d'organisation (OU)
 - Diagnostic de pannes avec les outils natifs Windows (`dcdiag`, `gpresult`, PowerShell)
 - Jonction de postes clients à un domaine Active Directory
 
 ## Prochaines étapes
 
-- [ ] Créer des unités d'organisation (OU) pour mieux structurer l'annuaire
-- [ ] Ajouter d'autres GPO (restrictions, sécurité)
-- [ ] Documenter la structure des GPO avec des exports
-- [ ] Ajouter un export des paramètres DNS/DHCP
+- [ ] Mettre en place une politique de mot de passe plus stricte (Fine-Grained Password Policy)
+- [ ] Ajouter un deuxième poste client pour se rapprocher d'un vrai petit parc
+- [ ] Activer l'audit des connexions (journaux de sécurité) sur le contrôleur de domaine
+- [ ] Documenter une procédure de sauvegarde/snapshot du contrôleur de domaine
 
 ---
 
-*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 23/10/2026.*
+*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 26/10/2026.*
+
