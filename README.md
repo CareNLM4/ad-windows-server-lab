@@ -25,13 +25,16 @@ Mettre en place, configurer et documenter un petit réseau d'entreprise réalist
                                     │
                            réseau NAT (VMware, VMnet8)
                                     │
-                    ┌───────────────┴───────────────┐
-                    │   Client(s) Windows 10           │
-                    │   IP via DHCP (ex: .100)         │
-                    │   Membres du domaine lab.local2  │
-                    │   GPO appliquées (fond d'écran,  │
-                    │   lecteur réseau) selon le groupe│
-                    └─────────────────────────────────┘
+                ┌───────────────────┴───────────────────┐
+                │                                        │
+    ┌───────────┴───────────┐              ┌─────────────┴───────────┐
+    │  Client 1 (Windows 10) │              │  Client 2 (Windows 10)  │
+    │  IP via DHCP (ex: .100)│              │  IP via DHCP (ex: .101) │
+    │  Membre lab.local2     │              │  Membre lab.local2      │
+    │  GPO (fond d'écran,    │              │  GPO (restrictions,     │
+    │  lecteur réseau) selon │              │  audit) selon l'OU      │
+    │  le groupe             │              │                         │
+    └─────────────────────────┘             └───────────────────────┘
 ```
 
 ## Outils utilisés
@@ -137,4 +140,4 @@ Les GPO de blocage du Panneau de configuration et de l'invite de commandes avaie
 
 ---
 
-*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 02/11/2026.*
+*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 30/10/2026.*
