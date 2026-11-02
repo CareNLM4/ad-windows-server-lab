@@ -85,6 +85,22 @@ Mettre en place, configurer et documenter un petit réseau d'entreprise réalist
 - Zone DNS exportée avec `Export-DnsServerZone` → [`exports/lab.local2-export.dns`](exports/lab.local2-export.dns)
 - Configuration DHCP (étendue, options, baux) exportée avec `Export-DhcpServer` → [`exports/DHCP-Export.xml`](exports/DHCP-Export.xml)
 
+### 8. Politique de mot de passe affinée (Fine-Grained Password Policy)
+- Création d'une PSO (`PSO-Responsable`) via le Centre d'administration Active Directory, ciblée sur le groupe `Responsable` : longueur minimale 12 caractères, historique de 24 mots de passe, expiration à 30 jours, verrouillage après 3 tentatives échouées.
+- Vérifiée avec `Get-ADUserResultantPasswordPolicy` : la politique s'applique bien par-dessus la Default Domain Policy pour ce groupe.
+
+### 9. Deuxième poste client
+- Nouvelle VM Windows 10 (pas une copie de la première), jointe au domaine `lab.local2` et placée dans l'OU `WorkStations`, pour se rapprocher d'un vrai petit parc informatique.
+- Le DHCP ne répondait pas au premier essai sur cette VM (adresse APIPA) : IP manuelle temporaire pour confirmer la jonction au domaine, puis carte réseau remise en "Automatique (DHCP)" — IP bien obtenue ensuite via le serveur DHCP du domaine.
+
+### 10. Audit des connexions
+- Stratégie d'audit des ouvertures de session activée sur le contrôleur de domaine (Default Domain Controllers Policy) et étendue aux postes clients via une GPO dédiée (`Audit-Connexions-Clients`) liée à l'OU `WorkStations`.
+- Vérifiée dans l'Observateur d'événements (ID 4624) et avec `auditpol /get`, sur le serveur et sur un client. Chaque machine garde son propre journal Sécurité local — aucune centralisation automatique entre elles dans ce lab.
+
+### 11. Sauvegarde de l'état système
+- Fonctionnalité **Sauvegarde Windows Server** installée, avec un deuxième disque virtuel dédié (`E:`) ajouté à la VM pour servir de cible — l'état système ne peut pas être sauvegardé sur le disque qu'il protège (`C:`).
+- Sauvegarde lancée avec `wbadmin start systemstatebackup -backuptarget:E:` et vérifiée avec `wbadmin get versions` (base Active Directory, SYSVOL, registre, état du système inclus).
+
 ## Problèmes rencontrés et comment ils ont été résolus
 
 **Autorisation du serveur DHCP en échec (erreur 20070)**
@@ -96,6 +112,9 @@ La GPO de fond d'écran s'appliquait bien (confirmé avec `gpresult /r`) et le f
 **Lecteur réseau "orphelin" après modification d'une GPO**
 En réorganisant les GPO (séparation du fond d'écran et du mappage de lecteur en deux objets distincts), le lecteur réseau restait mappé sur le client avec l'ancien chemin, même après suppression du réglage dans la GPO d'origine (confirmé avec `net use`). Cause : une Préférence de stratégie de groupe supprimée ne retire pas automatiquement ce qu'elle avait déjà appliqué sur le client, sauf si l'option **"Supprimer cet élément lorsqu'il n'est plus appliqué"** avait été cochée dès sa création. Correction ponctuelle avec `net use X: /delete` puis `gpupdate /force`.
 
+**GPO de restriction liées au domaine entier, bloquant le serveur lui-même**
+Les GPO de blocage du Panneau de configuration et de l'invite de commandes avaient été liées directement au domaine `lab.local2`, donc appliquées aussi à l'OU `Domain Controllers` — y compris au compte Administrateur en session sur le serveur. Au-delà de ça, le mauvais objet avait été visé : ces GPO ciblent la **Configuration Utilisateur**, qui s'applique selon l'OU du **compte utilisateur** connecté, pas celle de l'ordinateur — les lier à `WorkStations` (qui ne contient que des objets ordinateur) n'avait donc aucun effet. Correction : liens supprimés du domaine et déplacés vers l'OU `Accounts` (où se trouvent les comptes utilisateurs), ce qui a résolu les deux problèmes en même temps.
+
 ## Compétences démontrées
 
 - Installation et configuration de rôles Windows Server (AD DS, DNS, DHCP, Services de fichiers)
@@ -105,15 +124,17 @@ En réorganisant les GPO (séparation du fond d'écran et du mappage de lecteur 
 - Structuration de l'annuaire avec des unités d'organisation (OU)
 - Diagnostic de pannes avec les outils natifs Windows (`dcdiag`, `gpresult`, PowerShell)
 - Jonction de postes clients à un domaine Active Directory
+- Durcissement des mots de passe avec une Fine-Grained Password Policy ciblée
+- Mise en place et vérification d'une stratégie d'audit des connexions (Observateur d'événements, `auditpol`)
+- Sauvegarde de l'état système d'un contrôleur de domaine (Windows Server Backup)
 
 ## Prochaines étapes
 
-- [ ] Mettre en place une politique de mot de passe plus stricte (Fine-Grained Password Policy)
-- [ ] Ajouter un deuxième poste client pour se rapprocher d'un vrai petit parc
-- [ ] Activer l'audit des connexions (journaux de sécurité) sur le contrôleur de domaine
-- [ ] Documenter une procédure de sauvegarde/snapshot du contrôleur de domaine
+- [ ] Tester une vraie restauration à partir de la sauvegarde de l'état système (pour l'instant, seule la sauvegarde a été validée)
+- [ ] Centraliser les journaux de sécurité de toutes les machines sur le serveur (transfert d'événements / Windows Event Collector)
+- [ ] Étendre le blocage à PowerShell, pas seulement `cmd.exe` (AppLocker ou stratégies de restriction logicielle)
+- [ ] Affiner les permissions NTFS du partage de fichiers par groupe, plutôt qu'un accès ouvert à tous
 
 ---
 
-*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 26/10/2026.*
-
+*Projet en cours, documenté au fur et à mesure. Dernière mise à jour : 02/11/2026.*
